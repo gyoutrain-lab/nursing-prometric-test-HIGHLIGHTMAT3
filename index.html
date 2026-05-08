@@ -3,197 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maternity Nurse Mastery: Comprehensive Day 1-3</title>
+    <title>Maternity Nurse Mastery: Full 75-Item Simulator</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f4f7f6; }
-        .header { background-color: #c0392b; color: white; padding: 25px; border-radius: 8px; text-align: center; margin-bottom: 30px; }
-        .header h1 { margin: 0 0 10px 0; font-size: 1.8em; }
-        .header p { margin: 0; font-size: 1em; opacity: 0.9; }
-        #welcome-screen { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; }
-        .input-group { margin: 20px 0; }
-        .input-group label { display: block; margin-bottom: 8px; font-weight: 600; }
-        .input-group input { width: 80%; max-width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; }
-        .progress-container { width: 100%; background-color: #ddd; border-radius: 10px; margin-bottom: 20px; display: none; }
-        .progress-bar { height: 20px; background-color: #e67e22; width: 0%; border-radius: 10px; transition: width 0.3s; }
-        .question-card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: none; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; }
+        .header { background-color: #2c3e50; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 20px; border-bottom: 5px solid #e67e22; }
+        #welcome-screen, #results-screen { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+        .timer-box { font-size: 1.2em; font-weight: bold; color: #c0392b; margin: 10px 0; }
+        .progress-container { width: 100%; background-color: #ddd; border-radius: 10px; margin: 20px 0; height: 12px; }
+        .progress-bar { height: 100%; background-color: #27ae60; width: 0%; border-radius: 10px; transition: width 0.3s; }
+        .question-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: none; margin-bottom: 20px; }
         .question-card.active { display: block; }
-        .option { display: block; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; transition: 0.2s; }
-        .option:hover { background-color: #ecf0f1; }
-        .option.selected { border-width: 2px; }
-        .btn-nav { background-color: #2c3e50; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 20px; font-size: 1em; }
-        #results-screen { display: none; background: white; padding: 30px; border-radius: 8px; text-align: center; }
-        .rationale { display: none; margin-top: 15px; padding: 15px; background-color: #fdf2e9; border-left: 5px solid #e67e22; font-size: 0.9em; text-align: left; }
+        .option { display: block; padding: 15px; margin: 10px 0; border: 2px solid #edf2f7; border-radius: 8px; cursor: pointer; transition: 0.3s; background: #fff; }
+        .option:hover { border-color: #3498db; background-color: #f7fbff; }
+        .option.selected-correct { background-color: #2ecc71 !important; color: white; border-color: #27ae60; }
+        .option.selected-wrong { background-color: #e74c3c !important; color: white; border-color: #c0392b; }
+        .option.reveal-correct { border-color: #2ecc71; background-color: #eafaf1; }
+        .rationale { display: none; margin-top: 20px; padding: 15px; background-color: #fff9f1; border-left: 5px solid #e67e22; border-radius: 4px; font-style: italic; }
+        .btn-nav { background-color: #2c3e50; color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-size: 1em; margin-top: 15px; }
+        .btn-nav:disabled { background-color: #bdc3c7; cursor: not-allowed; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>Maternity Nurse Mastery</h1>
-    <p>Days 1, 2, & 3: Antenatal, Intrapartum, and Postpartum</p>
+    <h1>Maternity Nurse Test Mastery</h1>
+    <p>Comprehensive Assessment: Days 1, 2, & 3</p>
 </div>
 
 <div id="welcome-screen">
-    <h2>Full Curriculum Mastery Simulator</h2>
-    <div class="input-group">
-        <label for="user-name">Candidate Name:</label>
-        <input type="text" id="user-name" placeholder="Enter Full Name">
+    <h2>75-Item Specialist Simulator</h2>
+    <p>This exam covers Antenatal, Intrapartum, and Postpartum nursing care.</p>
+    <div style="margin: 20px 0;">
+        <input type="text" id="user-name" placeholder="Enter Full Name" style="padding: 12px; width: 250px; border-radius: 5px; border: 1px solid #ccc;">
     </div>
-    <button class="btn-nav" onclick="startExam()">Begin Examination</button>
+    <button class="btn-nav" onclick="startExam()">Start 25-Minute Exam</button>
 </div>
 
-<div class="progress-container" id="progress-container">
-    <div class="progress-bar" id="progress-bar"></div>
+<div id="exam-ui" style="display:none;">
+    <div class="timer-box">Time Remaining: <span id="timer">25:00</span></div>
+    <div class="progress-container"><div class="progress-bar" id="progress-bar"></div></div>
+    <div id="quiz-container"></div>
 </div>
 
-<div id="quiz-container"></div>
-
-<div id="results-screen">
-    <h2>Exam Results</h2>
-    <p id="candidate-name"></p>
-    <p id="score-text"></p>
+<div id="results-screen" style="display:none;">
+    <h2>Final Report</h2>
+    <h3 id="res-name"></h3>
+    <p id="res-score" style="font-size: 1.5em; font-weight: bold;"></p>
+    <p id="res-comment"></p>
     <button class="btn-nav" onclick="location.reload()">Restart Training</button>
 </div>
 
 <script>
+    // DATA SOURCE: DAY 1 [cite: 1], DAY 2 [cite: 262], DAY 3 [cite: 524]
     const questions = [
-        // DAY 1 EXCERPTS
-        {
-            q: "A 32-week pregnant client presents with a blood pressure of 150/95 mmHg and 2+ proteinuria. Which additional finding suggests progression to Preeclampsia with Severe Features?",
-            options: ["Increased fetal movement.", "Persistent frontal headache or visual disturbances.", "Mild swelling of the ankles at the end of the day.", "Increased appetite and weight gain."],
-            correct: 1,
-            rationale: "Severe features involve CNS manifestations like persistent headaches or visual changes[cite: 97, 99]."
-        },
-        {
-            q: "At what gestational age is GBS (Group B Streptococcus) screening typically performed?",
-            options: ["12–14 weeks.", "20–22 weeks.", "28–30 weeks.", "35–37 weeks."],
-            correct: 3,
-            rationale: "GBS screening is conducted near term, typically between 35 and 37 weeks[cite: 109, 113]."
-        },
-        {
-            q: "Which physiological change is considered normal during the second trimester?",
-            options: ["Decrease in maternal heart rate.", "Increased cardiac output and blood volume.", "Increased blood pressure.", "Decreased GFR."],
-            correct: 1,
-            rationale: "Increased cardiac output and blood volume are normal physiological adaptations during the second trimester[cite: 114, 116]."
-        },
-        // DAY 2 EXCERPTS
-        {
-            q: "A client is 5 cm dilated and 80% effaced. What is the expected frequency and duration of contractions?",
-            options: ["Every 10–15 minutes, 20 seconds.", "Every 3–5 minutes, 40–70 seconds.", "Every 1–2 minutes, 90 seconds.", "Every 20 minutes, 15 seconds."],
-            correct: 1,
-            rationale: "In the Active phase, contractions occur every 3–5 minutes and last 40–70 seconds[cite: 359, 361]."
-        },
-        {
-            q: "The nurse observes a sudden gush of blood and the umbilical cord lengthening during the third stage. This indicates:",
-            options: ["Impending birth.", "Placental separation.", "Uterine rupture.", "Cervical laceration."],
-            correct: 1,
-            rationale: "These are classic clinical signs that the placenta has separated from the uterine wall[cite: 403, 405]."
-        },
-        {
-            q: "Which maneuver is indicated for management of Shoulder Dystocia?",
-            options: ["Fundal pressure.", "McRoberts maneuver.", "High-Fowler’s position.", "Magnesium Sulfate bolus."],
-            correct: 1,
-            rationale: "McRoberts maneuver (flexing thighs against abdomen) is used to open the pelvic outlet[cite: 442, 444]."
-        },
-        // DAY 3 EXCERPTS
-        {
-            q: "Where should the nurse find the uterine fundus 6 hours postpartum?",
-            options: ["At the symphysis pubis.", "At the level of the umbilicus.", "Midway to the symphysis pubis.", "Non-palpable."],
-            correct: 1,
-            rationale: "By 6 hours postpartum, the fundus is expected to be at the level of the umbilicus[cite: 617, 619]."
-        },
-        {
-            q: "A client 2 days postpartum reports dark red discharge with small clots. This is documented as:",
-            options: ["Lochia serosa.", "Lochia alba.", "Lochia rubra.", "Lochia sanguinous."],
-            correct: 2,
-            rationale: "Lochia rubra is the dark red discharge occurring in the first 1-3 days postpartum[cite: 623, 626]."
-        },
-        {
-            q: "A postpartum client has a boggy fundus displaced to the right side. What is the first action?",
-            options: ["Administer Hemabate.", "Perform vigorous massage.", "Assist the client to empty their bladder.", "Call for surgery."],
-            correct: 2,
-            rationale: "A full bladder often displaces the uterus; emptying it allows the uterus to contract effectively[cite: 457, 459, 649]."
-        }
+        // DAY 1: ANTENATAL [cite: 1]
+        { q: "A 32-week pregnant client presents with a blood pressure of 150/95 mmHg and 2+ proteinuria. Which additional finding suggests progression to Preeclampsia with Severe Features?", options: ["Increased fetal movement and high appetite.", "Persistent frontal headache or visual disturbances.", "Mild swelling of the ankles at the end of the day.", "Weight gain of 0.5 kg within the past week."], correct: 1, rationale: "Severe features include CNS symptoms like persistent headaches or visual disturbances[cite: 4]." },
+        { q: "At what gestational age is GBS (Group B Streptococcus) screening typically performed?", options: ["Between 12–14 weeks gestation.", "Between 20–22 weeks gestation.", "Between 28–30 weeks gestation.", "Between 35–37 weeks gestation."], correct: 3, rationale: "GBS screening is conducted near term to identify colonization before birth[cite: 10]." },
+        { q: "Which physiological change is considered normal during the second trimester of pregnancy?", options: ["Decrease in baseline maternal heart rate.", "Increased cardiac output and blood volume.", "Increased blood pressure due to resistance.", "Decreased glomerular filtration rate (GFR)."], correct: 1, rationale: "Plasma volume and cardiac output increase significantly to support the fetus[cite: 11]." },
+        { q: "Which factor in a client's history places her at the highest risk for Abruptio Placentae?", options: ["First-time pregnancy (Primigravida).", "History of well-managed gestational diabetes.", "Maternal hypertension or cocaine use.", "Vegan diet and low caffeine intake."], correct: 2, rationale: "Hypertension and cocaine use are leading risk factors for placental abruption[cite: 15]." },
+        { q: "A result of 155 mg/dL on a 1-hour Glucose Challenge Test (OGCT) requires which priority action?", options: ["Document the result as within normal limits.", "Advise the client to start insulin immediately.", "Schedule the client for a 3-hour OGTT.", "Eliminate all carbohydrates from the diet."], correct: 2, rationale: "A result above 140 mg/dL requires a definitive 3-hour diagnostic test[cite: 20]." },
+        { q: "During a second-trimester ultrasound, a shortened cervix (<25 mm) is noted. This increases risk for:", options: ["Fetal macrosomia.", "Preterm labor and birth.", "Post-term pregnancy.", "Gestational hypertension."], correct: 1, rationale: "A shortened cervix is a primary indicator for potential preterm delivery[cite: 23]." },
+        { q: "What medication is indicated for an Rh-negative client at 28 weeks with a negative indirect Coombs test?", options: ["Magnesium Sulfate.", "Rho(D) Immune Globulin (RhoGAM).", "Betamethasone.", "Terbutaline."], correct: 1, rationale: "RhoGAM is given at 28 weeks to prevent isoimmunization in Rh-negative mothers[cite: 26]." },
+        { q: "Which finding in a fetal Biophysical Profile (BPP) score would contribute 2 points?", options: ["Absence of fetal breathing for 30 minutes.", "One episode of rhythmic breathing for 30 seconds.", "Less than two fetal movements in 30 minutes.", "Limb extension without a return to flexion."], correct: 1, rationale: "Sustained rhythmic breathing is a marker of fetal well-being[cite: 27]." },
+        { q: "Abnormally high levels of Alpha-Fetoprotein (AFP) in maternal serum are associated with:", options: ["Down Syndrome (Trisomy 21).", "Neural Tube Defects (Spina Bifida).", "Gestational Trophoblastic Disease.", "Controlled Maternal Diabetes."], correct: 1, rationale: "High AFP levels typically indicate open neural tube defects[cite: 31]." },
+        { q: "To avoid Toxoplasmosis, the nurse should prioritize which instruction?", options: ["Avoid raw meat and handling cat litter.", "Stay away from children who have rashes.", "Update MMR vaccinations during pregnancy.", "Wash hands after using public transport."], correct: 0, rationale: "Toxoplasmosis is transmitted via undercooked meat and feline feces[cite: 34]." },
+        { q: "Leopold’s Maneuvers reveal a hard, round object in the fundus and soft shape above the symphysis. This is:", options: ["Vertex (Cephalic) presentation.", "Breech presentation.", "Transverse lie.", "Face presentation."], correct: 1, rationale: "A hard, round object in the fundus indicates the head is at the top (Breech)[cite: 38]." },
+        { q: "To maximize iron supplement absorption, the nurse recommends taking it with:", options: ["A glass of milk or calcium.", "A cup of hot tea or coffee.", "A glass of orange juice or Vitamin C.", "A high-fiber bran muffin."], correct: 2, rationale: "Vitamin C significantly enhances the absorption of iron[cite: 42]." },
+        { q: "Which finding during a contraction stress test (CST) is interpreted as a negative (normal) result?", options: ["Late decelerations with 50% of contractions.", "Occasional variable decelerations.", "No late decelerations with 3 contractions in 10 min.", "FHR accelerations with movement."], correct: 2, rationale: "A negative CST means no late decelerations occurred with contractions[cite: 45]." },
+        { q: "Supine Hypotensive Syndrome in the third trimester is primarily caused by:", options: ["Compression of the inferior vena cava.", "A sudden drop in blood glucose levels.", "Increased pressure on the diaphragm.", "Dehydration and low electrolyte levels."], correct: 0, rationale: "The heavy uterus compresses the vena cava when the mother is supine[cite: 47]." },
+        { q: "What is the most important nursing intervention for an Amniocentesis at 16 weeks?", options: ["Instruct the client to drink 1 liter of water.", "Ensure the client has an empty bladder.", "Administer general anesthesia for the client.", "Place the client in a prone position."], correct: 1, rationale: "An empty bladder prevents accidental puncture during the procedure[cite: 52]." },
+        { q: "Mild Polyhydramnios is most commonly associated with which maternal complication?", options: ["Gestational Diabetes.", "Preeclampsia.", "Iron Deficiency Anemia.", "Hyperemesis Gravidarum."], correct: 0, rationale: "Excess amniotic fluid is frequently linked to maternal hyperglycemia[cite: 56]." },
+        { q: "What is the physiological cause and nursing action for Early Decelerations?", options: ["Cause: Cord compression; Action: Turn to side.", "Cause: Head compression; Action: Monitor (normal).", "Cause: Placental insufficiency; Action: Give O2.", "Cause: Maternal hypotension; Action: Fluids."], correct: 1, rationale: "Early decelerations are benign and caused by fetal head compression[cite: 59]." },
+        { q: "Low AFP, low Estriol, and high hCG (Triple Screen) are characteristic of:", options: ["Neural Tube Defects.", "Trisomy 18 (Edwards Syndrome).", "Trisomy 21 (Down Syndrome).", "Multiple Gestation."], correct: 2, rationale: "This pattern is the classic 'Triple Screen' marker for Down Syndrome[cite: 62]." },
+        { q: "In Hyperemesis Gravidarum, which laboratory finding is most likely?", options: ["Low urine specific gravity.", "Metabolic Alkalosis with hypokalemia.", "High blood glucose levels.", "Respiratory Acidosis."], correct: 1, rationale: "Severe vomiting leads to loss of gastric acid and potassium[cite: 64]." },
+        { q: "High-risk history of previous ectopic pregnancy increases the risk for recurrence because of:", options: ["Uterine fibroids or polyps.", "Tubal scarring or pelvic inflammatory disease.", "Poor nutrition and low folic acid.", "Excessive physical activity in early pregnancy."], correct: 1, rationale: "Damage to the fallopian tubes is the primary risk factor for ectopic pregnancy[cite: 171, 183]." },
+        { q: "Gestational hypertension is defined as BP ≥ 140/90 mmHg for the first time after:", options: ["12 weeks gestation.", "20 weeks gestation.", "28 weeks gestation.", "36 weeks gestation."], correct: 1, rationale: "Hypertension before 20 weeks is usually considered chronic, not gestational[cite: 96]." },
+        { q: "Which fetal heart rate baseline is considered within the normal range?", options: ["90–110 beats per minute.", "110–160 beats per minute.", "160–180 beats per minute.", "180–200 beats per minute."], correct: 1, rationale: "The standard normal FHR range is 110 to 160 bpm[cite: 102]." },
+        { q: "The 'indirect Coombs test' is used to detect:", options: ["Glucose levels in maternal blood.", "Antibodies against Rh-positive blood.", "AFP levels for neural tube defects.", "The presence of meconium in fluid."], correct: 1, rationale: "This test determines if the mother has been sensitized to Rh-positive blood[cite: 139]." },
+        { q: "The primary purpose of administering Betamethasone to a mother in preterm labor is:", options: ["To stop uterine contractions.", "To promote fetal lung maturity.", "To treat maternal infection.", "To increase maternal blood pressure."], correct: 1, rationale: "Steroids stimulate surfactant production in the fetal lungs[cite: 143]." },
+        { q: "A reactive non-stress test (NST) is characterized by:", options: ["No fetal heart rate accelerations.", "Two accelerations of 15 bpm for 15 seconds.", "Consistent late decelerations.", "A baseline FHR of 100 bpm."], correct: 1, rationale: "Reactivity requires two qualifying accelerations in a 20-minute window[cite: 7]." },
+
+        // DAY 2: INTRAPARTUM [cite: 262]
+        { q: "A client is 5 cm dilated and 80% effaced. What is the expected contraction frequency?", options: ["Every 10–15 minutes.", "Every 3–5 minutes.", "Every 1–2 minutes.", "Every 20 minutes."], correct: 1, rationale: "The active phase features regular contractions every 3–5 minutes[cite: 266]." },
+        { q: "Fetal presenting part is 2 cm above the ischial spines. This is documented as:", options: ["Station +2.", "Station 0.", "Station -2.", "Station -4."], correct: 2, rationale: "Above the spines is negative; 2 cm above is station -2[cite: 268]." },
+        { q: "Widest diameter of the fetal head passing through the pelvic inlet is called:", options: ["Descent.", "Extension.", "Engagement.", "External Rotation."], correct: 2, rationale: "Engagement occurs when the head is fixed in the pelvic inlet[cite: 269]." },
+        { q: "Fetal head visible at the vaginal opening and not receding between contractions is:", options: ["Floating.", "Restitution.", "Crowning.", "Effacement."], correct: 2, rationale: "Crowning indicates the birth is imminent[cite: 272]." },
+        { q: "Thick, green-stained amniotic fluid immediately following SROM indicates:", options: ["Normal healthy fluid.", "Meconium/fetal distress.", "Active infection.", "Vernix caseosa."], correct: 1, rationale: "Green fluid indicates meconium passage, often due to fetal stress[cite: 275]." },
+        { q: "Priority before an Epidural Block to prevent the most common side effect is:", options: ["Administer 500–1,000 mL IV crystalloid.", "Placing the client in prone position.", "Checking pupillary response.", "Administering oral magnesium trisilicate."], correct: 0, rationale: "IV fluids prevent maternal hypotension caused by the epidural[cite: 279]." },
+        { q: "Behavior typical of the Transition Phase (8-10 cm) includes:", options: ["Excitement and talkativeness.", "Irritability and 'giving up' behavior.", "Sleeping soundly between contractions.", "Asking for pain meds for the first time."], correct: 1, rationale: "Transition is the most intense phase, often causing emotional distress[cite: 283]." },
+        { q: "A sudden gush of blood and umbilical cord lengthening in the third stage indicate:", options: ["Impending birth.", "Placental separation.", "Uterine rupture.", "Cervical laceration."], correct: 1, rationale: "These are the classic signs of the placenta detaching[cite: 286]." },
+        { q: "What is the cause and action for Variable Decelerations?", options: ["Cause: Head compression; Action: Exam.", "Cause: Cord compression; Action: Change position.", "Cause: Insufficiency; Action: Increase Pitocin.", "Cause: Pyrexia; Action: Cool cloth."], correct: 1, rationale: "Variables are caused by cord compression; relief often comes with positioning[cite: 289]." },
+        { q: "Induction contractions every 90 seconds, lasting 100 seconds. Priority action?", options: ["Increase Oxytocin rate.", "Turn client onto back.", "Discontinue Oxytocin immediately.", "Document as a normal response."], correct: 2, rationale: "This is tachysystole and requires immediate cessation of Pitocin[cite: 293]." },
+        { q: "Which Bishop Score finding indicates a higher likelihood of successful induction?", options: ["Cervix is firm and posterior.", "Fetal station is -3.", "Cervix is soft and dilated 3 cm.", "Cervical effacement is 0–30%."], correct: 2, rationale: "A soft, dilated cervix indicates readiness for labor[cite: 297]." },
+        { q: "Decreased FHR variability for 40 minutes in a previously active fetus suggests:", options: ["Normal fetal sleep cycle.", "Immediate Cesarean section.", "Definitive fetal acidosis.", "Maternal supine position."], correct: 0, rationale: "Fetal sleep cycles are a common cause of temporary decreased variability[cite: 299]." },
+        { q: "The optimal breathing technique for the Second Stage of Labor is:", options: ["Prolonged Valsalva for 10 seconds.", "Open-glottis pushing (exhaling).", "Rapid, shallow panting.", "Holding breath until dizzy."], correct: 1, rationale: "Open-glottis pushing maintains better oxygenation for the fetus[cite: 303]." },
+        { q: "Posterior fontanel (triangular) at mother's left front side is documented as:", options: ["ROP (Right Occiput Posterior).", "LOA (Left Occiput Anterior).", "LOP (Left Occiput Posterior).", "ROT (Right Occiput Transverse)."], correct: 1, rationale: "Occiput (fontanel) is Left and Anterior[cite: 306]." },
+        { q: "The primary nursing goal during the Fourth Stage of Labor is:", options: ["Encouraging mother to push.", "Assessing cervical dilation.", "Monitoring for hemorrhage/bonding.", "Repairing the episiotomy."], correct: 2, rationale: "The first 1-4 hours postpartum are high risk for hemorrhage[cite: 309]." },
+        { q: "Sudden sharp pain, cessation of contractions, and loss of fetal station suggest:", options: ["Placenta Previa.", "Uterine Rupture.", "Amniotic Fluid Embolism.", "Precipitous Labor."], correct: 1, rationale: "A 'retreating' presenting part is a hallmark of uterine rupture[cite: 312]." },
+        { q: "Immediate priority for a pulsating loop felt during a vaginal exam after ROM:", options: ["Push the structure back.", "Apply upward pressure on the fetal head.", "Wait for the doctor to arrive.", "Administer Oxytocin."], correct: 1, rationale: "This is a prolapsed cord; pressure on the head prevents cord compression[cite: 315]." },
+        { q: "Indicated maneuver for Shoulder Dystocia is:", options: ["Fundal pressure.", "McRoberts maneuver.", "High-Fowler’s position.", "Magnesium Sulfate bolus."], correct: 1, rationale: "McRoberts maneuver opens the pelvic outlet to release the shoulder[cite: 321]." },
+        { q: "Most critical assessment for a client attempting a TOLAC:", options: ["Signs of uterine scar dehiscence.", "Newborn feeding preference.", "Temperature every 15 minutes.", "Ensuring the client remains NPO."], correct: 0, rationale: "The primary risk of TOLAC is rupture at the old incision site[cite: 323]." },
+        { q: "What is the purpose of the 'Leopold Maneuvers'?", options: ["To assess cervical dilation.", "To determine fetal position/presentation.", "To measure amniotic fluid volume.", "To check for placental location."], correct: 1, rationale: "Leopold maneuvers determine how the fetus is lying in the uterus[cite: 36, 164]." },
+        { q: "A station of +4 indicates that the fetal presenting part is:", options: ["Floating high in the pelvis.", "At the level of the ischial spines.", "On the perineum (crowning).", "Above the pelvic inlet."], correct: 2, rationale: "A +4 or +5 station means the head is at the outlet[cite: 268]." },
+        { q: "The medication used to reverse Magnesium Sulfate toxicity is:", options: ["Naloxone.", "Calcium Gluconate.", "Terbutaline.", "Vitamin K."], correct: 1, rationale: "Calcium gluconate is the specific antagonist for magnesium." },
+        { q: "Late decelerations on the FHR monitor are primarily caused by:", options: ["Umbilical cord compression.", "Uteroplacental insufficiency.", "Fetal head compression.", "Maternal temperature."], correct: 1, rationale: "Late decelerations reflect poor placental perfusion." },
+        { q: "Which stage of labor involves the delivery of the placenta?", options: ["First Stage.", "Second Stage.", "Third Stage.", "Fourth Stage."], correct: 2, rationale: "The third stage begins after the baby is born and ends with placental birth[cite: 285]." },
+        { q: "A Bishop Score of 9 suggests:", options: ["Induction is unlikely to succeed.", "High likelihood of successful induction.", "Immediate need for a C-section.", "The cervix is completely closed."], correct: 1, rationale: "Higher scores indicate a 'ripe' cervix ready for labor[cite: 296]." },
+
+        // DAY 3: POSTPARTUM [cite: 524]
+        { q: "Where should the uterine fundus be 6 hours postpartum?", options: ["Level of symphysis pubis.", "Level of the umbilicus.", "Midway to the umbilicus.", "Non-palpable."], correct: 1, rationale: "The fundus rises to the umbilicus shortly after delivery[cite: 527]." },
+        { q: "Dark red discharge with small clots 2 days postpartum is:", options: ["Lochia serosa.", "Lochia alba.", "Lochia rubra.", "Lochia sanguinous."], correct: 2, rationale: "Rubra is the normal red discharge for the first 1-3 days[cite: 530]." },
+        { q: "Which change is expected during the first 48 hours after vaginal delivery?", options: ["Temperature of 39°C.", "Diuresis and diaphoresis.", "Heart rate of 120 bpm.", "Respiratory rate of 12."], correct: 1, rationale: "The body eliminates excess pregnancy fluid via sweat and urine[cite: 532]." },
+        { q: "Postpartum 'afterpains' while breastfeeding are caused by:", options: ["Prolactin.", "Progesterone.", "Oxytocin.", "Estrogen."], correct: 2, rationale: "Breastfeeding triggers oxytocin, which causes the uterus to contract[cite: 534]." },
+        { q: "A second-degree laceration involves which structures?", options: ["Vaginal mucosa only.", "Mucosa and perineal muscles.", "Mucosa, muscles, and anal sphincter.", "Mucosa and rectal wall."], correct: 1, rationale: "A second-degree tear extends into the muscles but not the sphincter[cite: 537]." },
+        { q: "Saturated pad in 15 mins with a firm, midline fundus suggests:", options: ["Uterine Atony.", "Vaginal/cervical laceration.", "Retained fragments.", "Normal lochia."], correct: 1, rationale: "If the uterus is firm but bleeding is heavy, suspect a laceration[cite: 541]." },
+        { q: "To prevent Mastitis, the nurse should instruct the mother to:", options: ["Wash nipples with soap.", "Wear a tight underwire bra.", "Ensure proper latch and rotation.", "Limit feeds to 5 minutes."], correct: 2, rationale: "Emptying the breast and avoiding nipple trauma prevents infection[cite: 544]." },
+        { q: "Feeling tearful and anxious 3 days postpartum while still caring for the baby is:", options: ["Postpartum Psychosis.", "Postpartum Depression.", "Baby Blues.", "Generalized Anxiety."], correct: 2, rationale: "Baby Blues are common and transient, unlike clinical depression[cite: 546]." },
+        { q: "Priority nursing intervention for DVT following C-section:", options: ["Massage the affected leg.", "Encourage vigorous exercise.", "Anticoagulants and bedrest.", "Apply cold compresses."], correct: 2, rationale: "Bedrest prevents clot dislodgement; anticoagulants treat the clot[cite: 549]." },
+        { q: "Clinical finding expected with Endometritis:", options: ["Bradycardia/hypotension.", "Pelvic pain/foul lochia.", "Clear odorless discharge.", "Firm, non-tender fundus."], correct: 1, rationale: "Fever, pain, and malodorous lochia indicate uterine infection[cite: 552]." },
+        { q: "Critical assessment before Methylergonovine (Methergine):", options: ["Breath sounds/O2 sat.", "Blood pressure measurement.", "Deep tendon reflexes.", "Blood glucose level."], correct: 1, rationale: "Methergine is contraindicated in clients with hypertension[cite: 555]." },
+        { q: "Rho(D) Immune Globulin must be given to an Rh- mother within:", options: ["12 hours of delivery.", "24 hours of delivery.", "72 hours of delivery.", "1 week of delivery."], correct: 2, rationale: "The standard window for RhoGAM is 72 hours postpartum[cite: 558]." },
+        { q: "Which condition is a contraindication to breastfeeding?", options: ["Mastitis.", "Inverted nipples.", "HIV infection.", "Hepatitis C infection."], correct: 2, rationale: "In many regions, HIV is a contraindication due to transmission risk[cite: 561]." },
+        { q: "Most important instruction for Rubella vaccination:", options: ["No breastfeeding for 48 hrs.", "Avoid pregnancy for 28 days.", "Stay away from children.", "Expect a high fever."], correct: 1, rationale: "The vaccine is live; pregnancy must be avoided to prevent fetal harm[cite: 564]." },
+        { q: "Advice for a client performing sit-ups 24 hours after C-section:", options: ["'Excellent for core strength.'", "'Wait at least 6 weeks.'", "'Use an abdominal binder.'", "'Do 50 reps for blood clots.'"], correct: 1, rationale: "Strenuous abdominal exercise must wait for surgical healing[cite: 568]." },
+        { q: "REEDA 'E' for Ecchymosis refers to:", options: ["Drainage on dressing.", "Bruising around incision.", "Swelling of skin edges.", "Redness at suture line."], correct: 1, rationale: "Ecchymosis is the medical term for bruising[cite: 573]." },
+        { q: "Potential sign of Hypovolemic Shock to report immediately:", options: ["HR 60, BP 110/70.", "Rapid respirations/clammy skin.", "Output of 50 mL/hr.", "Moderate lochia rubra."], correct: 1, rationale: "Tachycardia and cool skin are early signs of shock[cite: 575]." },
+        { q: "Behavior expected in the 'Taking-In' phase:", options: ["Takes full charge of baby.", "Focused on own needs/birth story.", "Seeking cord care info.", "Deep depression/withdrawal."], correct: 1, rationale: "The mother is passive and focuses on her own recovery in this phase[cite: 579]." },
+        { q: "Most common indicator of a vaginal Hematoma:", options: ["Drop in temperature.", "Persistent pain/rectal pressure.", "Absence of lochia.", "Heavy bleeding/large clots."], correct: 1, rationale: "Pressure and 'unbearable' pain indicate internal bleeding (hematoma)[cite: 584]." },
+        { q: "Consistent lab result for DIC (Disseminated Intravascular Coagulation):", options: ["High fibrinogen levels.", "Increased D-dimer levels.", "High platelet count.", "Rapid clotting time."], correct: 1, rationale: "D-dimer increases as the body attempts to break down widespread clots." },
+        { q: "Postpartum diuresis helps the mother's body:", options: ["Produce more breast milk.", "Eliminate excess plasma volume.", "Prevent infection.", "Stabilize blood glucose."], correct: 1, rationale: "This is a normal physiological process to return to pre-pregnancy state[cite: 630]." },
+        { q: "Lochia Serosa typically appears around day:", options: ["Day 1–3.", "Day 4–10.", "Day 11–14.", "Day 21–28."], correct: 1, rationale: "Serosa is pink/brown and follows the rubra phase." },
+        { q: "A boggy uterus displaced to the right usually indicates:", options: ["Uterine atony.", "A full bladder.", "Retained placenta.", "Normal involution."], correct: 1, rationale: "The bladder pushes the uterus up and to the right, causing bogginess[cite: 457]." },
+        { q: "The 'Taking-Hold' phase is characterized by:", options: ["Extreme exhaustion.", "Eagerness to learn and care for baby.", "Complete focus on the birth story.", "Fear of touching the infant."], correct: 1, rationale: "In this phase, the mother becomes more independent and ready to learn." },
+        { q: "A postpartum heart rate of 50 bpm (bradycardia) is:", options: ["A sign of early hemorrhage.", "A normal physiological finding.", "An indicator of infection.", "Caused by dehydration."], correct: 1, rationale: "Puerperal bradycardia is common due to decreased cardiac strain." }
     ];
 
-    let currentQuestionIndex = 0;
+    let currentIdx = 0;
     let score = 0;
-    let participantName = "";
+    let timerInterval;
+    let timeLeft = 1500; // 25 minutes
 
     function startExam() {
-        const nameInput = document.getElementById('user-name').value.trim();
-        if (!nameInput) {
-            alert("Please enter a name to continue.");
-            return;
-        }
-        participantName = nameInput;
+        const name = document.getElementById('user-name').value.trim();
+        if(!name) return alert("Please enter your name.");
         document.getElementById('welcome-screen').style.display = 'none';
-        document.getElementById('progress-container').style.display = 'block';
-        initQuiz();
-        document.querySelectorAll('.question-card')[0].classList.add('active');
+        document.getElementById('exam-ui').style.display = 'block';
+        renderQuestion();
+        startTimer();
     }
 
-    function initQuiz() {
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            let mins = Math.floor(timeLeft / 60);
+            let secs = timeLeft % 60;
+            document.getElementById('timer').innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            if(timeLeft <= 0) {
+                clearInterval(timerInterval);
+                finishExam();
+            }
+        }, 1000);
+    }
+
+    function renderQuestion() {
         const container = document.getElementById('quiz-container');
-        questions.forEach((q, index) => {
-            const card = document.createElement('div');
-            card.className = `question-card`;
-            card.id = `q-card-${index}`;
-            card.innerHTML = `
-                <h3>Question ${index + 1} of ${questions.length}</h3>
-                <p><strong>${q.q}</strong></p>
-                ${q.options.map((opt, i) => `<div class="option" onclick="selectOption(${index}, ${i}, this)">${opt}</div>`).join('')}
-                <div class="rationale" id="rationale-${index}"><strong>Specialist Rationale:</strong> ${q.rationale}</div>
-                <button class="btn-nav" id="next-btn-${index}" onclick="nextQuestion()" style="display:none">Continue</button>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    function selectOption(qIndex, oIndex, element) {
-        const card = document.getElementById(`q-card-${qIndex}`);
-        if (card.querySelector('.selected')) return;
+        container.innerHTML = '';
+        const qData = questions[currentIdx];
         
-        element.classList.add('selected');
-        const options = card.querySelectorAll('.option');
-        const rationale = card.querySelector(`#rationale-${qIndex}`);
-        
-        if (oIndex === questions[qIndex].correct) {
-            score++;
-            element.style.backgroundColor = "#27ae60";
-            element.style.color = "white";
-        } else {
-            element.style.backgroundColor = "#e74c3c";
-            element.style.color = "white";
-            options[questions[qIndex].correct].style.backgroundColor = "#27ae60";
-            options[questions[qIndex].correct].style.color = "white";
-        }
-        rationale.style.display = 'block';
-        document.getElementById(`next-btn-${qIndex}`).style.display = 'inline-block';
-    }
-
-    function nextQuestion() {
-        const cards = document.querySelectorAll('.question-card');
-        cards[currentQuestionIndex].classList.remove('active');
-        currentQuestionIndex++;
+        const card = document.createElement('div');
+        card.className = 'question-card active';
+        card.innerHTML = `
+            <h3>Question ${currentIdx + 1} of 75</h3>
+            <p><strong>${qData.q}</strong></p>
+            ${qData.options.map((opt, i) => `<div class="option" onclick="handleSelect(${i}, this)">${opt}</div>`).join('')}
+            <div class="rationale" id="rat"><strong>Expert Rationale:</strong> ${qData.rationale}</div>
+            <button class="btn-nav" id="next-btn" onclick="nextQ()" style="display:none">Continue to Next Item</button>
+        `;
+        container.appendChild(card);
         updateProgress();
-        if (currentQuestionIndex < questions.length) {
-            cards[currentQuestionIndex].classList.add('active');
+    }
+
+    function handleSelect(choice, el) {
+        const correct = questions[currentIdx].correct;
+        const options = document.querySelectorAll('.option');
+        if(document.getElementById('next-btn').style.display === 'inline-block') return;
+
+        if(choice === correct) {
+            score++;
+            el.classList.add('selected-correct');
         } else {
-            showResults();
+            el.classList.add('selected-wrong');
+            options[correct].classList.add('reveal-correct');
+        }
+        document.getElementById('rat').style.display = 'block';
+        document.getElementById('next-btn').style.display = 'inline-block';
+    }
+
+    function nextQ() {
+        currentIdx++;
+        if(currentIdx < questions.length) {
+            renderQuestion();
+        } else {
+            finishExam();
         }
     }
 
     function updateProgress() {
-        const percent = (currentQuestionIndex / questions.length) * 100;
-        document.getElementById('progress-bar').style.width = percent + '%';
+        const prog = (currentIdx / questions.length) * 100;
+        document.getElementById('progress-bar').style.width = prog + '%';
     }
 
-    function showResults() {
-        document.getElementById('progress-container').style.display = 'none';
-        const results = document.getElementById('results-screen');
-        results.style.display = 'block';
-        document.getElementById('candidate-name').innerHTML = `Candidate: <strong>${participantName}</strong>`;
-        document.getElementById('score-text').innerText = `Final Score: ${score} / ${questions.length}`;
+    function finishExam() {
+        clearInterval(timerInterval);
+        document.getElementById('exam-ui').style.display = 'none';
+        const res = document.getElementById('results-screen');
+        res.style.display = 'block';
+        document.getElementById('res-name').innerText = `Candidate: ${document.getElementById('user-name').value}`;
+        document.getElementById('res-score').innerText = `Score: ${score} / 75 (${Math.round((score/75)*100)}%)`;
+        document.getElementById('res-comment').innerText = score > 60 ? "Excellent Mastery!" : "Review rationales for improvement.";
     }
 </script>
 </body>
