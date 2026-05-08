@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maternity Nurse Mastery: Day 1, 2, & 3 Comprehensive</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; }
+        .header { background-color: #2c3e50; color: white; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        #setup-screen, #results-screen { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
+        .timer-bar { position: sticky; top: 10px; z-index: 100; background: #e74c3c; color: white; padding: 10px; border-radius: 8px; font-weight: bold; text-align: center; margin-bottom: 20px; display: none; }
+        .question-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 25px; display: none; }
+        .question-card.active { display: block; animation: fadeIn 0.5s; }
+        .option { display: block; padding: 15px; margin: 10px 0; border: 2px solid #edf2f7; border-radius: 8px; cursor: pointer; transition: 0.3s; background: #f8fafc; }
+        .option:hover { border-color: #3498db; background: #ebf8ff; }
+        .option.selected-correct { background-color: #27ae60 !important; color: white; border-color: #27ae60; }
+        .option.selected-wrong { background-color: #e74c3c !important; color: white; border-color: #e74c3c; }
+        .rationale { display: none; margin-top: 20px; padding: 20px; background-color: #fffaf0; border-left: 5px solid #f6ad55; font-size: 0.95em; border-radius: 4px; }
+        .btn { background-color: #2c3e50; color: white; border: none; padding: 12px 30px; border-radius: 6px; cursor: pointer; font-size: 1em; font-weight: 600; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Maternity Nursing Mastery</h1>
+    <p>Comprehensive 3-Day Curriculum Simulator</p>
+</div>
+
+<div id="timer" class="timer-bar">Time Remaining: 25:00</div>
+
+<div id="setup-screen">
+    <h2>Ready to begin the Mastery Test?</h2>
+    <p>This exam combines Antenatal, Intrapartum, and Postpartum content.</p>
+    <div style="margin: 20px 0;">
+        <input type="text" id="user-name" placeholder="Enter Candidate Name" style="padding: 12px; width: 280px; border: 1px solid #cbd5e0; border-radius: 6px;">
+    </div>
+    <button class="btn" onclick="startExam()">Start 25-Minute Exam</button>
+</div>
+
+<div id="quiz-container"></div>
+
+<div id="results-screen" style="display:none;">
+    <h2>Examination Complete</h2>
+    <div id="final-score" style="font-size: 2em; margin: 20px 0; color: #2c3e50;"></div>
+    <p id="candidate-display"></p>
+    <button class="btn" onclick="location.reload()">Restart Full Series</button>
+</div>
+
+<script>
+    const questions = [
+        // DAY 1: ANTENATAL
+        { q: "A 32-week pregnant client presents with a blood pressure of 150/95 mmHg and 2+ proteinuria. Which additional assessment finding would most strongly suggest a progression to Preeclampsia with Severe Features?", 
+          options: ["Increased fetal movement", "Persistent frontal headache or visual disturbances", "Mild swelling of the ankles", "Increased appetite"], correct: 1, 
+          rationale: "Severe features include CNS involvement like headaches/vision changes. Ankle edema is common in normal pregnancy." },
+        { q: "During a non-stress test (NST), the nurse observes the fetal heart rate (FHR) accelerate 15 beats per minute above the baseline for at least 15 seconds, twice in a 20-minute period. Document this as:", 
+          options: ["Non-reactive NST", "Reactive NST", "Positive contraction stress test", "Unsatisfactory test"], correct: 1, 
+          rationale: "A 'Reactive' NST indicates fetal oxygenation and an intact autonomic nervous system via the 15x15 rule." },
+        { q: "At what gestational age is GBS (Group B Streptococcus) screening typically performed?", 
+          options: ["12–14 weeks", "20–22 weeks", "28–30 weeks", "35–37 weeks"], correct: 3, 
+          rationale: "GBS colonization status can change; screening is done near delivery to determine if intrapartum antibiotics are needed." },
+        { q: "A nurse is preparing a client for an Amniocentesis at 16 weeks gestation. Which nursing intervention is most important?", 
+          options: ["Instruct the client to drink 1 liter of water", "Ensure the client has an empty bladder", "Administer general anesthesia", "Place the client in a prone position"], correct: 1, 
+          rationale: "By the second trimester, the uterus is an abdominal organ; an empty bladder reduces the risk of accidental puncture." },
+        
+        // DAY 2: LABOR & DELIVERY
+        { q: "A client is in the Active Phase of labor (5 cm dilated). What is the expected frequency and duration of contractions?", 
+          options: ["Every 10–15 minutes, 20 seconds", "Every 3–5 minutes, 40–70 seconds", "Every 1–2 minutes, 90 seconds", "Every 20 minutes, 15 seconds"], correct: 1, 
+          rationale: "Active phase (4–7 cm) contractions become more regular and frequent to facilitate cervical dilation." },
+        { q: "During the third stage of labor, the nurse observes a sudden gush of blood and the umbilical cord lengthening. This indicates:", 
+          options: ["Impending birth", "Placental separation", "Uterine rupture", "Cervical laceration"], correct: 1, 
+          rationale: "A gush of blood and cord lengthening are classic clinical signs that the placenta has detached from the uterine wall." },
+        { q: "The nurse observes Variable Decelerations on the fetal monitor. What is the physiological cause and priority action?", 
+          options: ["Head compression; Continue to monitor", "Cord compression; Change maternal position", "Placental insufficiency; Administer oxygen", "Maternal hypotension; Increase IV fluids"], correct: 1, 
+          rationale: "Variable decelerations indicate cord compression. Repositioning the mother is the first step to relieve pressure." },
+        { q: "Which maneuver is specifically indicated for the management of Shoulder Dystocia?", 
+          options: ["Fundal pressure", "McRoberts maneuver", "High-Fowler’s position", "Magnesium Sulfate bolus"], correct: 1, 
+          rationale: "McRoberts maneuver (flexing thighs against abdomen) opens the pelvic outlet. Fundal pressure is contraindicated." },
+
+        // DAY 3: POSTPARTUM
+        { q: "A nurse is assessing a client who is 6 hours postpartum. Where should the nurse expect to find the level of the uterine fundus?", 
+          options: ["At the level of the symphysis pubis", "At the level of the umbilicus", "Midway to the symphysis pubis", "Non-palpable"], correct: 1, 
+          rationale: "Within 6-12 hours of birth, the fundus rises to the level of the umbilicus before beginning its daily descent." },
+        { q: "A client who is 2 days postpartum reports a dark red discharge with small clots. Document this as:", 
+          options: ["Lochia serosa", "Lochia alba", "Lochia rubra", "Lochia sanguinous"], correct: 2, 
+          rationale: "Lochia rubra (dark red) typically lasts 1-3 days. Serosa is pink/brown, and Alba is yellow/white." },
+        { q: "A postpartum client is experiencing 'afterpains' while breastfeeding. This is caused by the release of which hormone?", 
+          options: ["Prolactin", "Progesterone", "Oxytocin", "Estrogen"], correct: 2, 
+          rationale: "Breastfeeding triggers the release of oxytocin, which causes uterine contractions (afterpains) to aid involution." },
+        { q: "The nurse notes a client's fundus is boggy and displaced to the right side 2 hours postpartum. What is the priority action?", 
+          options: ["Perform fundal massage", "Administer oxytocin", "Assist the client to empty their bladder", "Notify the physician"], correct: 2, 
+          rationale: "A full bladder is the primary cause of a displaced, boggy uterus. Emptying it allows the uterus to contract." }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+    let timeLeft = 25 * 60;
+    let timerId;
+
+    function startExam() {
+        const name = document.getElementById('user-name').value.trim();
+        if (!name) return alert("Please enter candidate name.");
+        
+        document.getElementById('setup-screen').style.display = 'none';
+        document.getElementById('timer').style.display = 'block';
+        initQuiz();
+        startTimer();
+    }
+
+    function initQuiz() {
+        const container = document.getElementById('quiz-container');
+        questions.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = `question-card ${index === 0 ? 'active' : ''}`;
+            card.id = `card-${index}`;
+            card.innerHTML = `
+                <h3>Question ${index + 1} of ${questions.length}</h3>
+                <p style="font-size: 1.1em; font-weight: 500;">${item.q}</p>
+                <div class="options-list">
+                    ${item.options.map((opt, i) => `<div class="option" onclick="handleSelect(${index}, ${i}, this)">${opt}</div>`).join('')}
+                </div>
+                <div class="rationale" id="rat-${index}"><strong>Rationale:</strong> ${item.rationale}</div>
+                <div style="margin-top:20px; text-align:right;">
+                    <button class="btn" id="btn-${index}" style="display:none;" onclick="nextQuestion()">Next Question</button>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function handleSelect(qIdx, choiceIdx, el) {
+        const card = document.getElementById(`card-${qIdx}`);
+        if (card.getAttribute('data-answered')) return;
+        card.setAttribute('data-answered', 'true');
+
+        const correct = questions[qIdx].correct;
+        const options = card.querySelectorAll('.option');
+
+        if (choiceIdx === correct) {
+            score++;
+            el.classList.add('selected-correct');
+        } else {
+            el.classList.add('selected-wrong');
+            options[correct].classList.add('selected-correct');
+        }
+
+        card.querySelector('.rationale').style.display = 'block';
+        document.getElementById(`btn-${qIdx}`).style.display = 'inline-block';
+    }
+
+    function nextQuestion() {
+        document.getElementById(`card-${currentIdx}`).classList.remove('active');
+        currentIdx++;
+        if (currentIdx < questions.length) {
+            document.getElementById(`card-${currentIdx}`).classList.add('active');
+        } else {
+            endExam();
+        }
+    }
+
+    function startTimer() {
+        timerId = setInterval(() => {
+            timeLeft--;
+            let mins = Math.floor(timeLeft / 60);
+            let secs = timeLeft % 60;
+            document.getElementById('timer').innerText = `Time Remaining: ${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            if (timeLeft <= 0) endExam();
+        }, 1000);
+    }
+
+    function endExam() {
+        clearInterval(timerId);
+        document.getElementById('timer').style.display = 'none';
+        document.getElementById('quiz-container').style.display = 'none';
+        document.getElementById('results-screen').style.display = 'block';
+        document.getElementById('final-score').innerText = `${score} / ${questions.length}`;
+        document.getElementById('candidate-display').innerHTML = `Candidate: <strong>${document.getElementById('user-name').value}</strong>`;
+    }
+</script>
+
+</body>
+</html>
