@@ -3,180 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maternity Nurse Mastery: Day 1, 2, & 3 Comprehensive</title>
+    <title>Maternity Nurse Mastery: Comprehensive Day 1-3</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; }
-        .header { background-color: #2c3e50; color: white; padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        #setup-screen, #results-screen { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; }
-        .timer-bar { position: sticky; top: 10px; z-index: 100; background: #e74c3c; color: white; padding: 10px; border-radius: 8px; font-weight: bold; text-align: center; margin-bottom: 20px; display: none; }
-        .question-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 25px; display: none; }
-        .question-card.active { display: block; animation: fadeIn 0.5s; }
-        .option { display: block; padding: 15px; margin: 10px 0; border: 2px solid #edf2f7; border-radius: 8px; cursor: pointer; transition: 0.3s; background: #f8fafc; }
-        .option:hover { border-color: #3498db; background: #ebf8ff; }
-        .option.selected-correct { background-color: #27ae60 !important; color: white; border-color: #27ae60; }
-        .option.selected-wrong { background-color: #e74c3c !important; color: white; border-color: #e74c3c; }
-        .rationale { display: none; margin-top: 20px; padding: 20px; background-color: #fffaf0; border-left: 5px solid #f6ad55; font-size: 0.95em; border-radius: 4px; }
-        .btn { background-color: #2c3e50; color: white; border: none; padding: 12px 30px; border-radius: 6px; cursor: pointer; font-size: 1em; font-weight: 600; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f4f7f6; }
+        .header { background-color: #c0392b; color: white; padding: 25px; border-radius: 8px; text-align: center; margin-bottom: 30px; }
+        .header h1 { margin: 0 0 10px 0; font-size: 1.8em; }
+        .header p { margin: 0; font-size: 1em; opacity: 0.9; }
+        #welcome-screen { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; }
+        .input-group { margin: 20px 0; }
+        .input-group label { display: block; margin-bottom: 8px; font-weight: 600; }
+        .input-group input { width: 80%; max-width: 300px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; }
+        .progress-container { width: 100%; background-color: #ddd; border-radius: 10px; margin-bottom: 20px; display: none; }
+        .progress-bar { height: 20px; background-color: #e67e22; width: 0%; border-radius: 10px; transition: width 0.3s; }
+        .question-card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: none; }
+        .question-card.active { display: block; }
+        .option { display: block; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; transition: 0.2s; }
+        .option:hover { background-color: #ecf0f1; }
+        .option.selected { border-width: 2px; }
+        .btn-nav { background-color: #2c3e50; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 20px; font-size: 1em; }
+        #results-screen { display: none; background: white; padding: 30px; border-radius: 8px; text-align: center; }
+        .rationale { display: none; margin-top: 15px; padding: 15px; background-color: #fdf2e9; border-left: 5px solid #e67e22; font-size: 0.9em; text-align: left; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>Maternity Nursing Mastery</h1>
-    <p>Comprehensive 3-Day Curriculum Simulator</p>
+    <h1>Maternity Nurse Mastery</h1>
+    <p>Days 1, 2, & 3: Antenatal, Intrapartum, and Postpartum</p>
 </div>
 
-<div id="timer" class="timer-bar">Time Remaining: 25:00</div>
-
-<div id="setup-screen">
-    <h2>Ready to begin the Mastery Test?</h2>
-    <p>This exam combines Antenatal, Intrapartum, and Postpartum content.</p>
-    <div style="margin: 20px 0;">
-        <input type="text" id="user-name" placeholder="Enter Candidate Name" style="padding: 12px; width: 280px; border: 1px solid #cbd5e0; border-radius: 6px;">
+<div id="welcome-screen">
+    <h2>Full Curriculum Mastery Simulator</h2>
+    <div class="input-group">
+        <label for="user-name">Candidate Name:</label>
+        <input type="text" id="user-name" placeholder="Enter Full Name">
     </div>
-    <button class="btn" onclick="startExam()">Start 25-Minute Exam</button>
+    <button class="btn-nav" onclick="startExam()">Begin Examination</button>
+</div>
+
+<div class="progress-container" id="progress-container">
+    <div class="progress-bar" id="progress-bar"></div>
 </div>
 
 <div id="quiz-container"></div>
 
-<div id="results-screen" style="display:none;">
-    <h2>Examination Complete</h2>
-    <div id="final-score" style="font-size: 2em; margin: 20px 0; color: #2c3e50;"></div>
-    <p id="candidate-display"></p>
-    <button class="btn" onclick="location.reload()">Restart Full Series</button>
+<div id="results-screen">
+    <h2>Exam Results</h2>
+    <p id="candidate-name"></p>
+    <p id="score-text"></p>
+    <button class="btn-nav" onclick="location.reload()">Restart Training</button>
 </div>
 
 <script>
     const questions = [
-        // DAY 1: ANTENATAL
-        { q: "A 32-week pregnant client presents with a blood pressure of 150/95 mmHg and 2+ proteinuria. Which additional assessment finding would most strongly suggest a progression to Preeclampsia with Severe Features?", 
-          options: ["Increased fetal movement", "Persistent frontal headache or visual disturbances", "Mild swelling of the ankles", "Increased appetite"], correct: 1, 
-          rationale: "Severe features include CNS involvement like headaches/vision changes. Ankle edema is common in normal pregnancy." },
-        { q: "During a non-stress test (NST), the nurse observes the fetal heart rate (FHR) accelerate 15 beats per minute above the baseline for at least 15 seconds, twice in a 20-minute period. Document this as:", 
-          options: ["Non-reactive NST", "Reactive NST", "Positive contraction stress test", "Unsatisfactory test"], correct: 1, 
-          rationale: "A 'Reactive' NST indicates fetal oxygenation and an intact autonomic nervous system via the 15x15 rule." },
-        { q: "At what gestational age is GBS (Group B Streptococcus) screening typically performed?", 
-          options: ["12–14 weeks", "20–22 weeks", "28–30 weeks", "35–37 weeks"], correct: 3, 
-          rationale: "GBS colonization status can change; screening is done near delivery to determine if intrapartum antibiotics are needed." },
-        { q: "A nurse is preparing a client for an Amniocentesis at 16 weeks gestation. Which nursing intervention is most important?", 
-          options: ["Instruct the client to drink 1 liter of water", "Ensure the client has an empty bladder", "Administer general anesthesia", "Place the client in a prone position"], correct: 1, 
-          rationale: "By the second trimester, the uterus is an abdominal organ; an empty bladder reduces the risk of accidental puncture." },
-        
-        // DAY 2: LABOR & DELIVERY
-        { q: "A client is in the Active Phase of labor (5 cm dilated). What is the expected frequency and duration of contractions?", 
-          options: ["Every 10–15 minutes, 20 seconds", "Every 3–5 minutes, 40–70 seconds", "Every 1–2 minutes, 90 seconds", "Every 20 minutes, 15 seconds"], correct: 1, 
-          rationale: "Active phase (4–7 cm) contractions become more regular and frequent to facilitate cervical dilation." },
-        { q: "During the third stage of labor, the nurse observes a sudden gush of blood and the umbilical cord lengthening. This indicates:", 
-          options: ["Impending birth", "Placental separation", "Uterine rupture", "Cervical laceration"], correct: 1, 
-          rationale: "A gush of blood and cord lengthening are classic clinical signs that the placenta has detached from the uterine wall." },
-        { q: "The nurse observes Variable Decelerations on the fetal monitor. What is the physiological cause and priority action?", 
-          options: ["Head compression; Continue to monitor", "Cord compression; Change maternal position", "Placental insufficiency; Administer oxygen", "Maternal hypotension; Increase IV fluids"], correct: 1, 
-          rationale: "Variable decelerations indicate cord compression. Repositioning the mother is the first step to relieve pressure." },
-        { q: "Which maneuver is specifically indicated for the management of Shoulder Dystocia?", 
-          options: ["Fundal pressure", "McRoberts maneuver", "High-Fowler’s position", "Magnesium Sulfate bolus"], correct: 1, 
-          rationale: "McRoberts maneuver (flexing thighs against abdomen) opens the pelvic outlet. Fundal pressure is contraindicated." },
-
-        // DAY 3: POSTPARTUM
-        { q: "A nurse is assessing a client who is 6 hours postpartum. Where should the nurse expect to find the level of the uterine fundus?", 
-          options: ["At the level of the symphysis pubis", "At the level of the umbilicus", "Midway to the symphysis pubis", "Non-palpable"], correct: 1, 
-          rationale: "Within 6-12 hours of birth, the fundus rises to the level of the umbilicus before beginning its daily descent." },
-        { q: "A client who is 2 days postpartum reports a dark red discharge with small clots. Document this as:", 
-          options: ["Lochia serosa", "Lochia alba", "Lochia rubra", "Lochia sanguinous"], correct: 2, 
-          rationale: "Lochia rubra (dark red) typically lasts 1-3 days. Serosa is pink/brown, and Alba is yellow/white." },
-        { q: "A postpartum client is experiencing 'afterpains' while breastfeeding. This is caused by the release of which hormone?", 
-          options: ["Prolactin", "Progesterone", "Oxytocin", "Estrogen"], correct: 2, 
-          rationale: "Breastfeeding triggers the release of oxytocin, which causes uterine contractions (afterpains) to aid involution." },
-        { q: "The nurse notes a client's fundus is boggy and displaced to the right side 2 hours postpartum. What is the priority action?", 
-          options: ["Perform fundal massage", "Administer oxytocin", "Assist the client to empty their bladder", "Notify the physician"], correct: 2, 
-          rationale: "A full bladder is the primary cause of a displaced, boggy uterus. Emptying it allows the uterus to contract." }
+        // DAY 1 EXCERPTS
+        {
+            q: "A 32-week pregnant client presents with a blood pressure of 150/95 mmHg and 2+ proteinuria. Which additional finding suggests progression to Preeclampsia with Severe Features?",
+            options: ["Increased fetal movement.", "Persistent frontal headache or visual disturbances.", "Mild swelling of the ankles at the end of the day.", "Increased appetite and weight gain."],
+            correct: 1,
+            rationale: "Severe features involve CNS manifestations like persistent headaches or visual changes[cite: 97, 99]."
+        },
+        {
+            q: "At what gestational age is GBS (Group B Streptococcus) screening typically performed?",
+            options: ["12–14 weeks.", "20–22 weeks.", "28–30 weeks.", "35–37 weeks."],
+            correct: 3,
+            rationale: "GBS screening is conducted near term, typically between 35 and 37 weeks[cite: 109, 113]."
+        },
+        {
+            q: "Which physiological change is considered normal during the second trimester?",
+            options: ["Decrease in maternal heart rate.", "Increased cardiac output and blood volume.", "Increased blood pressure.", "Decreased GFR."],
+            correct: 1,
+            rationale: "Increased cardiac output and blood volume are normal physiological adaptations during the second trimester[cite: 114, 116]."
+        },
+        // DAY 2 EXCERPTS
+        {
+            q: "A client is 5 cm dilated and 80% effaced. What is the expected frequency and duration of contractions?",
+            options: ["Every 10–15 minutes, 20 seconds.", "Every 3–5 minutes, 40–70 seconds.", "Every 1–2 minutes, 90 seconds.", "Every 20 minutes, 15 seconds."],
+            correct: 1,
+            rationale: "In the Active phase, contractions occur every 3–5 minutes and last 40–70 seconds[cite: 359, 361]."
+        },
+        {
+            q: "The nurse observes a sudden gush of blood and the umbilical cord lengthening during the third stage. This indicates:",
+            options: ["Impending birth.", "Placental separation.", "Uterine rupture.", "Cervical laceration."],
+            correct: 1,
+            rationale: "These are classic clinical signs that the placenta has separated from the uterine wall[cite: 403, 405]."
+        },
+        {
+            q: "Which maneuver is indicated for management of Shoulder Dystocia?",
+            options: ["Fundal pressure.", "McRoberts maneuver.", "High-Fowler’s position.", "Magnesium Sulfate bolus."],
+            correct: 1,
+            rationale: "McRoberts maneuver (flexing thighs against abdomen) is used to open the pelvic outlet[cite: 442, 444]."
+        },
+        // DAY 3 EXCERPTS
+        {
+            q: "Where should the nurse find the uterine fundus 6 hours postpartum?",
+            options: ["At the symphysis pubis.", "At the level of the umbilicus.", "Midway to the symphysis pubis.", "Non-palpable."],
+            correct: 1,
+            rationale: "By 6 hours postpartum, the fundus is expected to be at the level of the umbilicus[cite: 617, 619]."
+        },
+        {
+            q: "A client 2 days postpartum reports dark red discharge with small clots. This is documented as:",
+            options: ["Lochia serosa.", "Lochia alba.", "Lochia rubra.", "Lochia sanguinous."],
+            correct: 2,
+            rationale: "Lochia rubra is the dark red discharge occurring in the first 1-3 days postpartum[cite: 623, 626]."
+        },
+        {
+            q: "A postpartum client has a boggy fundus displaced to the right side. What is the first action?",
+            options: ["Administer Hemabate.", "Perform vigorous massage.", "Assist the client to empty their bladder.", "Call for surgery."],
+            correct: 2,
+            rationale: "A full bladder often displaces the uterus; emptying it allows the uterus to contract effectively[cite: 457, 459, 649]."
+        }
     ];
 
-    let currentIdx = 0;
+    let currentQuestionIndex = 0;
     let score = 0;
-    let timeLeft = 25 * 60;
-    let timerId;
+    let participantName = "";
 
     function startExam() {
-        const name = document.getElementById('user-name').value.trim();
-        if (!name) return alert("Please enter candidate name.");
-        
-        document.getElementById('setup-screen').style.display = 'none';
-        document.getElementById('timer').style.display = 'block';
+        const nameInput = document.getElementById('user-name').value.trim();
+        if (!nameInput) {
+            alert("Please enter a name to continue.");
+            return;
+        }
+        participantName = nameInput;
+        document.getElementById('welcome-screen').style.display = 'none';
+        document.getElementById('progress-container').style.display = 'block';
         initQuiz();
-        startTimer();
+        document.querySelectorAll('.question-card')[0].classList.add('active');
     }
 
     function initQuiz() {
         const container = document.getElementById('quiz-container');
-        questions.forEach((item, index) => {
+        questions.forEach((q, index) => {
             const card = document.createElement('div');
-            card.className = `question-card ${index === 0 ? 'active' : ''}`;
-            card.id = `card-${index}`;
+            card.className = `question-card`;
+            card.id = `q-card-${index}`;
             card.innerHTML = `
                 <h3>Question ${index + 1} of ${questions.length}</h3>
-                <p style="font-size: 1.1em; font-weight: 500;">${item.q}</p>
-                <div class="options-list">
-                    ${item.options.map((opt, i) => `<div class="option" onclick="handleSelect(${index}, ${i}, this)">${opt}</div>`).join('')}
-                </div>
-                <div class="rationale" id="rat-${index}"><strong>Rationale:</strong> ${item.rationale}</div>
-                <div style="margin-top:20px; text-align:right;">
-                    <button class="btn" id="btn-${index}" style="display:none;" onclick="nextQuestion()">Next Question</button>
-                </div>
+                <p><strong>${q.q}</strong></p>
+                ${q.options.map((opt, i) => `<div class="option" onclick="selectOption(${index}, ${i}, this)">${opt}</div>`).join('')}
+                <div class="rationale" id="rationale-${index}"><strong>Specialist Rationale:</strong> ${q.rationale}</div>
+                <button class="btn-nav" id="next-btn-${index}" onclick="nextQuestion()" style="display:none">Continue</button>
             `;
             container.appendChild(card);
         });
     }
 
-    function handleSelect(qIdx, choiceIdx, el) {
-        const card = document.getElementById(`card-${qIdx}`);
-        if (card.getAttribute('data-answered')) return;
-        card.setAttribute('data-answered', 'true');
-
-        const correct = questions[qIdx].correct;
+    function selectOption(qIndex, oIndex, element) {
+        const card = document.getElementById(`q-card-${qIndex}`);
+        if (card.querySelector('.selected')) return;
+        
+        element.classList.add('selected');
         const options = card.querySelectorAll('.option');
-
-        if (choiceIdx === correct) {
+        const rationale = card.querySelector(`#rationale-${qIndex}`);
+        
+        if (oIndex === questions[qIndex].correct) {
             score++;
-            el.classList.add('selected-correct');
+            element.style.backgroundColor = "#27ae60";
+            element.style.color = "white";
         } else {
-            el.classList.add('selected-wrong');
-            options[correct].classList.add('selected-correct');
+            element.style.backgroundColor = "#e74c3c";
+            element.style.color = "white";
+            options[questions[qIndex].correct].style.backgroundColor = "#27ae60";
+            options[questions[qIndex].correct].style.color = "white";
         }
-
-        card.querySelector('.rationale').style.display = 'block';
-        document.getElementById(`btn-${qIdx}`).style.display = 'inline-block';
+        rationale.style.display = 'block';
+        document.getElementById(`next-btn-${qIndex}`).style.display = 'inline-block';
     }
 
     function nextQuestion() {
-        document.getElementById(`card-${currentIdx}`).classList.remove('active');
-        currentIdx++;
-        if (currentIdx < questions.length) {
-            document.getElementById(`card-${currentIdx}`).classList.add('active');
+        const cards = document.querySelectorAll('.question-card');
+        cards[currentQuestionIndex].classList.remove('active');
+        currentQuestionIndex++;
+        updateProgress();
+        if (currentQuestionIndex < questions.length) {
+            cards[currentQuestionIndex].classList.add('active');
         } else {
-            endExam();
+            showResults();
         }
     }
 
-    function startTimer() {
-        timerId = setInterval(() => {
-            timeLeft--;
-            let mins = Math.floor(timeLeft / 60);
-            let secs = timeLeft % 60;
-            document.getElementById('timer').innerText = `Time Remaining: ${mins}:${secs < 10 ? '0' : ''}${secs}`;
-            if (timeLeft <= 0) endExam();
-        }, 1000);
+    function updateProgress() {
+        const percent = (currentQuestionIndex / questions.length) * 100;
+        document.getElementById('progress-bar').style.width = percent + '%';
     }
 
-    function endExam() {
-        clearInterval(timerId);
-        document.getElementById('timer').style.display = 'none';
-        document.getElementById('quiz-container').style.display = 'none';
-        document.getElementById('results-screen').style.display = 'block';
-        document.getElementById('final-score').innerText = `${score} / ${questions.length}`;
-        document.getElementById('candidate-display').innerHTML = `Candidate: <strong>${document.getElementById('user-name').value}</strong>`;
+    function showResults() {
+        document.getElementById('progress-container').style.display = 'none';
+        const results = document.getElementById('results-screen');
+        results.style.display = 'block';
+        document.getElementById('candidate-name').innerHTML = `Candidate: <strong>${participantName}</strong>`;
+        document.getElementById('score-text').innerText = `Final Score: ${score} / ${questions.length}`;
     }
 </script>
-
 </body>
 </html>
